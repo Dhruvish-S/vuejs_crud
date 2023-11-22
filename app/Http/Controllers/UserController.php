@@ -7,6 +7,7 @@ use App\Models\User;
 use Input;
 use Hash;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Storage;
 
 class UserController extends Controller
 {
@@ -18,12 +19,12 @@ class UserController extends Controller
     public function store(Request $request)
     {
 
-        // $request->validate([
-        //     'first_name' => 'required',
-        //     'last_name' => 'required',
-        //     'email' => 'required|email|unique:users',
-        //     'password' => 'required|min:6'
-        // ]);
+        $request->validate([
+            'first_name' => 'required',
+            'last_name' => 'required',
+            'email' => 'required|email|unique:users',
+            'password' => 'required|min:6'
+        ]);
 
         // Log::info($request->file());
 
@@ -44,7 +45,7 @@ class UserController extends Controller
     public function update(Request $request, User $user)
     {
         $user->fill($request->post())->save();
-        dd($user);
+
         return response()->json([
             'message'=>'Users Updated Successfully!!',
             'user'=>$user

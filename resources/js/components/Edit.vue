@@ -89,9 +89,8 @@ export default {
             })
         },
         async update(){
-
             await
-            this.axios.post(`/api/users/${this.$route.params.id}`,this.category).then(response=>{
+            axios.post(`/api/users/${this.$route.params.id}`,this.users).then(response=>{
                 this.$router.push({name:"list"})
             }).catch(error=>{
                 console.log(error)

@@ -1,11 +1,12 @@
 <template>
-    <h1> {{ editing ? 'Edit' : 'Add' }} User Register</h1>
-    <form @submit.prevent="createUser" enctype="multipart/form-data">
+    <h1> User Register</h1>
+    <form @submit.prevent="createUser" enctype="multipart/form-data" novalidate="novalidate">
 
         <table>
             <tr>
                 <td>First Name: </td>
                 <td><input class="form-control" v-model="users.first_name"></td>
+
             </tr><br/>
             <tr>
                 <td>Last Name: </td>
@@ -36,9 +37,12 @@
             </tr><br/>
             <tr>
                 <td>Profile Pic: </td>
-                <td><input type="file" name="profile_pic" id="profile_pic" @change="Onchange"></td>
-            </tr><br/>
+                <td><input type="file" name="profile_pic" id="profile_pic" required @change="onChange"></td>
 
+            </tr><br/>
+            <div id="preview">
+                        <img v-if="url" :src="url" />
+            </div>
             <br/>
             <tr>
                 <td></td>
@@ -59,6 +63,8 @@ export default {
     name: "add-users",
     data() {
         return {
+url:null,
+errors:{},
             users:{
                 first_name: '',
                 last_name: '',
@@ -67,8 +73,9 @@ export default {
                 dob: '',
                 gender: '',
                 phone: '',
-                profile_pic: []
-            }
+                profile_pic: [],
+
+            },
 
         }
     },
@@ -87,23 +94,64 @@ export default {
 
             await
             axios.post('/api/users', formData).then(response => {
+                this.onSuccess(response.formData.message)
                 this.$router.push({
                     name: "list"
                 })
             }).catch(error => {
+                if(error.response.status === 422) {
+                    this.setErrors(error.response.formData.errors)
+                }
+                else{
+                    this.onFailures(error.response.formData.message)
+                }
+
                 console.log(error)
             })
+
+
+
         },
-        Onchange(e) {
+        onSuccess(){
+            this.success = true;
+        },
+        onFailures(){
+            this.error = true;
+        },
+        setErrors(error){
+            this.errors = error
+        },
+
+        onChange(e) {
             // const profile = e.target.files[0].name;
+
+
+            const profile = e.target.files[0];
+            this.url = URL.createObjectURL(profile);
+
             this.users.profile_pic = e.target.files[0]
 
         }
+
 
 
     },
 
 }
 </script>
+
+
+<style scoped>
+#preview {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#preview img {
+  max-width: 100%;
+  max-height: 500px;
+}
+</style>
 
 

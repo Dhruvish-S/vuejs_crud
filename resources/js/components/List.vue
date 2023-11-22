@@ -18,7 +18,6 @@
                                     <th>FirstName</th>
                                     <th>LastName</th>
                                     <th>Email</th>
-                                    <th>Password</th>
                                     <th>Dob</th>
                                     <th>Gender</th>
                                     <th>Contact Number</th>
@@ -32,14 +31,13 @@
                                     <td>{{ user.first_name }}</td>
                                     <td>{{ user.last_name }}</td>
                                     <td>{{ user.email }}</td>
-                                    <td>{{ user.password }}</td>
                                     <td>{{ user.dob }}</td>
                                     <td>{{ user.gender }}</td>
                                     <td>{{ user.phone }}</td>
 
                                     <td>
+                                        <img src="uploads/{{ user.profile_pic }}" style="width: 100px; height: 100px;">
 
-                                        {{ user.profile_pic }}
                                     </td>
                                     <td>
                                         <router-link :to="{name: 'edit', params: { id: user.id }}" class="btn btn-success">Edit</router-link>
