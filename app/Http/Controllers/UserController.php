@@ -60,12 +60,19 @@ class UserController extends Controller
         //     'profile_pic' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048'
         // ]);
 
+// dd($_FILES);
+        // if($request->file('profile_pic') == null){
+        //     $fileName = $user->profile_pic;
+        // }
+
+        if($request->file('profile_pic') != null){
+            dd('k');
+        }
 
         $fileName = time().'.'.$request->file->extension();
         // $fileName = time().'.'.$request->profile_pic->extension();
         $request->file->move(public_path('uploads'), $fileName);
 
-        // Log::info($fileName);
 
         $user = User::where('id', $user->id)->update([
             'first_name' => $request->first_name,
