@@ -13,7 +13,6 @@ class UserController extends Controller
 {
     public function index()
     {
-        // Log::info(asset('storage/uploads/1700630092.jpg'));
         $users = User::all(['id','first_name','last_name','email','password','dob','gender','phone','profile_pic']);
         return response()->json($users);
     }
@@ -31,7 +30,6 @@ class UserController extends Controller
             'profile_pic' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048'
         ]);
 
-        // Log::info($request->file());
 
         // $fileName = time().'.'.$request->file->extension();
         $fileName = time().'.'.$request->profile_pic->extension();
@@ -51,11 +49,32 @@ class UserController extends Controller
 
     public function update(Request $request, User $user)
     {
-        $user->fill($request->post())->save();
+        // $request->validate([
+        //     'first_name' => 'required',
+        //     'last_name' => 'required',
+        //     'email' => 'required|email|unique:users',
+        //     'password' => 'required|min:6',
+        //     'dob' => 'required',
+        //     'gender' => 'required',
+        //     'phone' => 'required',
+        //     'profile_pic' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048'
+        // ]);
 
-        return response()->json([
-            'message'=>'Users Updated Successfully!!',
-            'user'=>$user
+
+        $fileName = time().'.'.$request->file->extension();
+        // $fileName = time().'.'.$request->profile_pic->extension();
+        $request->file->move(public_path('uploads'), $fileName);
+
+        // Log::info($fileName);
+
+        $user = User::where('id', $user->id)->update([
+            'first_name' => $request->first_name,
+            'last_name' => $request->last_name,
+            'email' => $request->email,
+            'dob' => $request->dob,
+            'gender' => $request->gender,
+            'phone' => $request->phone,
+            'profile_pic' => $fileName
         ]);
     }
     public function destroy(User $user)

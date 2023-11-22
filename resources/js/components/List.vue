@@ -40,6 +40,7 @@
                                 </td>
                                     <td>
                                         <router-link :to="{name: 'edit', params: { id: user.id }}" class="btn btn-success">Edit</router-link>
+                                        &nbsp;
 
                                         <button type="button" @click="deleteUsers12(user.id)" class="btn btn-danger">Delete</button>
                                     </td>
@@ -77,13 +78,39 @@ export default {
         },
 
         deleteUsers12(id){
-            if(confirm("Are you sure to delete this users ?")){
-                axios.delete(`/api/users/${id}`).then(response=>{
-                    this.getUsers()
-                }).catch(error=>{
-                    console.log(error)
-                })
+            // if(confirm("Are you sure to delete this users ?")){
+            //     axios.delete(`/api/users/${id}`).then(response=>{
+            //         this.getUsers()
+            //     }).catch(error=>{
+            //         console.log(error)
+            //     })
+            // }
+
+        this.$swal.fire({
+            title: "Are you sure delete user?",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Yes, delete it!"
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    axios.delete(`/api/users/${id}`).then(response=>{
+                        this.getUsers()
+                    }).catch(error=>{
+                        console.log(error)
+                    })
+                }
+            if (result.isConfirmed) {
+                this.$swal.fire({
+                title: "Deleted!",
+                text: "Your User has been deleted.",
+                icon: "success"
+                });
             }
+        });
+
+
         }
 
     }

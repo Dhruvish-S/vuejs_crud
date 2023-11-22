@@ -1,51 +1,85 @@
 <template>
-    <h1> User Register</h1>
+    <h1> {{ editing ? 'Edit' : 'Add' }} User Register</h1>
     <form @submit.prevent="createUser" enctype="multipart/form-data" novalidate="novalidate">
 
         <table>
             <tr>
                 <td>First Name: </td>
-                <td><input class="form-control" v-model="users.first_name"></td>
-                <div v-if="hasErrors('first_name')" class="text-danger" style="font-weight: 600;">{{ errors.first_name[0] }}</div>
-            </tr><br/>
+                <td><input class="form-control {view: !isEditing}" v-model="users.first_name"></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td><div v-if="hasErrors('first_name')" class="text-danger" style="font-weight: 600;">{{ errors.first_name[0] }}</div></td>
+            </tr>
+            <br/>
+
             <tr>
                 <td>Last Name: </td>
                 <td><input class="form-control" v-model="users.last_name"></td>
-                <div v-if="hasErrors('last_name')" class="text-danger" style="font-weight: 600;">{{ errors.last_name[0] }}</div>
-            </tr><br/>
+            </tr>
+            <tr>
+                <td></td>
+                <td><div v-if="hasErrors('last_name')" class="text-danger" style="font-weight: 600;">{{ errors.last_name[0] }}</div></td>
+            </tr>
+            <br/>
+
             <tr>
                 <td>Email: </td>
                 <td><input class="form-control" v-model="users.email"></td>
-                <div v-if="hasErrors('email')" class="text-danger" style="font-weight: 600;">{{ errors.email[0] }}</div>
+            </tr>
+            <tr>
+                <td></td>
+                <td><div v-if="hasErrors('email')" class="text-danger" style="font-weight: 600;">{{ errors.email[0] }}</div></td>
             </tr><br/>
+
             <tr>
                 <td>Password: </td>
                 <td><input class="form-control" type="password" v-model="users.password"></td>
-                <div v-if="hasErrors('password')" class="text-danger" style="font-weight: 600;">{{ errors.password[0] }}</div>
+            </tr>
+            <tr>
+                <td></td>
+                <td><div v-if="hasErrors('password')" class="text-danger" style="font-weight: 600;">{{ errors.password[0] }}</div></td>
             </tr><br/>
+
             <tr>
                 <td>Dob: </td>
                 <td><input  type="date" v-model="users.dob"></td>
-                <div v-if="hasErrors('dob')" class="text-danger" style="font-weight: 600;">{{ errors.dob[0] }}</div>
+            </tr>
+            <tr>
+                <td></td>
+                <td><div v-if="hasErrors('dob')" class="text-danger" style="font-weight: 600;">{{ errors.dob[0] }}</div></td>
             </tr><br/>
+
             <tr>
                 <td>Gender: </td>
                 <td>
                     <input class="form-check-input" type="radio" id="Male" value="Male" name="gender" v-model="users.gender"> Male
                     <input class="form-check-input" type="radio" id="Female" value="Female" name="gender" v-model="users.gender"> Female
                 </td>
-                <div v-if="hasErrors('gender')" class="text-danger" style="font-weight: 600;">{{ errors.gender[0] }}</div>
+
+            </tr>
+            <tr>
+                <td></td>
+                <td><div v-if="hasErrors('gender')" class="text-danger" style="font-weight: 600;">{{ errors.gender[0] }}</div></td>
             </tr><br/>
+
             <tr>
                 <td>Phone Number: </td>
                 <td><input class="form-control" v-model="users.phone"></td>
-                <div v-if="hasErrors('phone')" class="text-danger" style="font-weight: 600;">{{ errors.phone[0] }}</div>
+            </tr>
+            <tr>
+                <td></td>
+                <td> <div v-if="hasErrors('phone')" class="text-danger" style="font-weight: 600;">{{ errors.phone[0] }}</div></td>
             </tr><br/>
+
             <tr>
                 <td>Profile Pic: </td>
                 <td><input type="file" name="profile_pic" id="profile_pic"  @change="onChange"></td>
-                <div v-if="hasErrors('profile_pic')" class="text-danger" style="font-weight: 600;">{{ errors.profile_pic[0] }}</div>
-            </tr><br/>
+            </tr>
+            <tr>
+                <td></td>
+                <td> <div v-if="hasErrors('profile_pic')" class="text-danger" style="font-weight: 600;">{{ errors.profile_pic[0] }}</div></td>
+            </tr>
             <div id="preview">
                         <img v-if="url" :src="url" />
             </div>
@@ -71,6 +105,7 @@ export default {
         return {
 url:null,
 errors:{},
+
             users:{
                 first_name: '',
                 last_name: '',
@@ -114,8 +149,6 @@ errors:{},
 
                 console.log(error)
             })
-
-
 
         },
 
