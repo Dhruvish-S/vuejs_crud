@@ -6,7 +6,7 @@
             <tr>
                 <td>First Name: </td>
                 <td><input class="form-control" v-model="users.first_name"></td>
-
+                <div v-if="hasErrors('first_name')" class="text-danger">{{ errors.first_name[0] }}</div>
             </tr><br/>
             <tr>
                 <td>Last Name: </td>
@@ -120,6 +120,9 @@ errors:{},
         },
         setErrors(error){
             this.errors = error
+        },
+        hasErrors(fieldName){
+            return (fieldName in this.errors)
         },
 
         onChange(e) {
