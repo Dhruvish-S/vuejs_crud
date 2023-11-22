@@ -35,10 +35,9 @@
                                     <td>{{ user.gender }}</td>
                                     <td>{{ user.phone }}</td>
 
-                                    <td>
-                                        <img src="uploads/{{ user.profile_pic }}" style="width: 100px; height: 100px;">
-
-                                    </td>
+                                <td>
+                                    <img :src="'/uploads/' + user.profile_pic" height="50" width="50"/>
+                                </td>
                                     <td>
                                         <router-link :to="{name: 'edit', params: { id: user.id }}" class="btn btn-success">Edit</router-link>
 
