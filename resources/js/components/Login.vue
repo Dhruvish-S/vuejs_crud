@@ -10,7 +10,6 @@
     <input type="password" class="form-control" name="password" id="password" v-model="users.password">
   </div>
   <button type="submit" class="btn btn-primary">Login</button>
-  <h1>dhruvish</h1>
 </form>
 </template>
 
@@ -34,22 +33,30 @@ export default {
       axios.post('/api/login', this.users).then(({data}) => {
         console.log(data);
 
-       try{
-          if(data.status === true){
-            alert("Login Successfully");
-            this.$router.push({ name: 'home' })
-          }
-          else{
-            alert("Login Failed");
-          }
-       }
-       catch(err){
-            alert("Error, please try again");
-       }
+        Auth.login(data.access_token,data.user);
+        this.$router.push({ name: 'home' })
+    //    try{
+    //       if(data.status === true){
+    //         alert("Login Failed");
+    //       }
+    //       else{
+    //         alert("Login Successfully");
+    //         this.$router.push({ name: 'home' })
+    //       }
+    //    }
+    //    catch(err){
+    //         alert("Error, please try again");
+    //    }
 
 
 
       })
+
+
+      .catch((error) => {
+                        console.log(error);
+                    });
+
     }
   }
 

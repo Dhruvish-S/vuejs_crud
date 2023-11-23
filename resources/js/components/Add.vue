@@ -41,6 +41,17 @@
                 <td><div v-if="hasErrors('password')" class="text-danger" style="font-weight: 600;">{{ errors.password[0] }}</div></td>
             </tr><br/>
 
+
+
+            <tr>
+                <td>Confirm Password: </td>
+                <td><input class="form-control" type="password" v-model="users.confirm_password"></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td><div v-if="hasErrors('confirm_password')" class="text-danger" style="font-weight: 600;">{{ errors.confirm_password[0] }}</div></td>
+            </tr><br/>
+
             <tr>
                 <td>Dob: </td>
                 <td><input  type="date" v-model="users.dob"></td>
@@ -111,6 +122,7 @@ errors:{},
                 last_name: '',
                 email: '',
                 password: '',
+                confirm_password: '',
                 dob: '',
                 gender: '',
                 phone: '',
@@ -128,6 +140,7 @@ errors:{},
             formData.append('last_name', this.users.last_name);
             formData.append('email', this.users.email);
             formData.append('password', this.users.password);
+            formData.append('confirm_password', this.users.confirm_password);
             formData.append('dob', this.users.dob);
             formData.append('gender', this.users.gender);
             formData.append('phone', this.users.phone);

@@ -27,4 +27,8 @@ Route::resource('users',App\Http\Controllers\UserController::class)->only(['inde
 Route::post('/login', [LoginController::class, 'check']);
 
 
-Route::get('/logout', [LogoutController::class, 'logoutUser'])->name('logout');
+// Route::get('/logout', [LogoutController::class, 'logoutUser'])->name('logout');
+
+Route::middleware('auth:api')->group(function () {
+    Route::post('/logout', [LoginController::class, 'logout']);
+});
