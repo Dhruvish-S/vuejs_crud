@@ -3,6 +3,8 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\LoginController;
+use App\Http\Controllers\LogoutController;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,3 +23,8 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 
 Route::resource('users',App\Http\Controllers\UserController::class)->only(['index','store','show','update','destroy']);
+
+Route::post('/login', [LoginController::class, 'check']);
+
+
+Route::get('/logout', [LogoutController::class, 'logoutUser'])->name('logout');

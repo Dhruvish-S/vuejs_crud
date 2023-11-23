@@ -60,7 +60,6 @@ export default {
                 first_name: '',
                 last_name: '',
                 email: '',
-                password: '',
                 dob: '',
                 gender: '',
                 phone: '',

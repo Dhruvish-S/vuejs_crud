@@ -10,6 +10,7 @@
                         <router-link to="/" class="nav-item nav-link">Home</router-link>
                         <router-link  to="/users" class="nav-item nav-link" >Add Users</router-link>
                         <router-link  to="/list" class="nav-item nav-link" >List Users</router-link>
+                        <router-link  to="/logout" class="nav-item nav-link" >Logout</router-link>
                     </div>
                 </div>
             </div>
@@ -23,8 +24,7 @@
     </main>
 
 </template>
-<script setup>
 
-
+<script>
 
 </script>

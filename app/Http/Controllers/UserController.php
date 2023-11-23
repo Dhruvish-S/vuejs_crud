@@ -49,25 +49,25 @@ class UserController extends Controller
 
     public function update(Request $request, User $user)
     {
-        // $request->validate([
-        //     'first_name' => 'required',
-        //     'last_name' => 'required',
-        //     'email' => 'required|email|unique:users',
-        //     'password' => 'required|min:6',
-        //     'dob' => 'required',
-        //     'gender' => 'required',
-        //     'phone' => 'required',
-        //     'profile_pic' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048'
-        // ]);
+        $request->validate([
+            'first_name' => 'required',
+            'last_name' => 'required',
+            'email' => 'required|email|unique:users',
+            'password' => 'required|min:6',
+            'dob' => 'required',
+            'gender' => 'required',
+            'phone' => 'required',
+            'profile_pic' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048'
+        ]);
 
 // dd($_FILES);
         // if($request->file('profile_pic') == null){
         //     $fileName = $user->profile_pic;
         // }
 
-        if($request->file('profile_pic') != null){
-            dd('k');
-        }
+        // if($request->file('profile_pic') != null){
+        //     dd('k');
+        // }
 
         $fileName = time().'.'.$request->file->extension();
         // $fileName = time().'.'.$request->profile_pic->extension();

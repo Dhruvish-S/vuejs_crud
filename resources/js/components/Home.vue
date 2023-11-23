@@ -1,4 +1,6 @@
 <template>
-    <h1>List Users</h1>
+    <h1>Welcome to the Home page {{ email }}</h1>
 </template>
-<script setup></script>
+<script>
+
+</script>

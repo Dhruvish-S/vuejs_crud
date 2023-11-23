@@ -23,6 +23,16 @@ const routes =[
         name:'edit',
         component: () => import('../js/components/Edit.vue')
     },
+    {
+        path:'/login',
+        name:'login',
+        component: () => import('../js/components/Login.vue')
+    },
+    {
+        path:'/logout',
+        name:'logout',
+        component: () => import('../js/components/Login.vue')
+    },
 ]
 
 
